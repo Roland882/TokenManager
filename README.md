@@ -1,6 +1,6 @@
 <h1>TokenManager</h1> 
 
-[![](https://jitpack.io/v/Nexatrix-Studios/TokenManager.svg)](https://jitpack.io/#Nexatrix-Studios/TokenManager)
+[![](https://jitpack.io/v/Roland882/TokenManager.svg)](https://jitpack.io/#Roland882/TokenManager)
 
 ### Please note that this is not the original plugin this a forked version that supports 1.21.
 
@@ -10,9 +10,9 @@
 * **[Wiki](https://github.com/Realizedd/TokenManager/wiki)**
 * **[Commands](https://github.com/Realizedd/TokenManager/wiki/commands)**
 * **[Permissions](https://github.com/Realizedd/TokenManager/wiki/permissions)**
-* **[config.yml](https://github.com/Nexatrix-Studios/TokenManager/blob/master/src/main/resources/config.yml)**
-* **[lang.yml](https://github.com/Nexatrix-Studios/TokenManager/blob/master/src/main/resources/lang.yml)**
-* **[shops.yml](https://github.com/Nexatrix-Studios/TokenManager/blob/master/src/main/resources/shops.yml)**
+* **[config.yml](https://github.com/Roland882/TokenManager/blob/master/src/main/resources/config.yml)**
+* **[lang.yml](https://github.com/Roland882/TokenManager/blob/master/src/main/resources/lang.yml)**
+* **[shops.yml](https://github.com/Roland882/TokenManager/blob/master/src/main/resources/shops.yml)**
 
 
 ### Getting the dependency
@@ -38,20 +38,20 @@ Maven:
 Gradle:
 ```groovy
 dependencies {
-    implementation 'com.github.Nexatrix-Studios:TokenManager:VERSION'
+    implementation 'com.github.Roland882:TokenManager:Tag'
 }
 ```  
-Replace 'VERSION' with version
+Replace 'VERSION' with the tag
 
 Maven:
 ```xml
 <dependency>
-    <groupId>com.github.Nexatrix-Studios</groupId>
+    <groupId>com.github.Roland882</groupId>
     <artifactId>TokenManager</artifactId>
-    <version>VERSION</version>
+    <version>Tag</version>
 </dependency>
 ```
-Replace 'VERSION' with version
+Replace 'VERSION' with the tag
 
 ### plugin.yml
 Add TokenManager as a soft-depend to ensure TokenManager is fully loaded before your plugin.

@@ -1,0 +1,121 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'me.realized'
+version = '3.2.8-CUSTOM'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name = 'spigot-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/public'
+    }
+
+    maven {
+        name = 'bungeecord-repo'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+
+    maven {
+        name = 'mvdw-repo'
+        url = 'http://repo.mvdw-software.be/content/groups/public/'
+        allowInsecureProtocol = true
+    }
+
+    maven {
+        name = 'placeholderapi'
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+
+    maven {
+        name = 'codemc-repo'
+        url = 'https://repo.codemc.io/repository/maven-public/'
+    }
+
+    maven {
+        name = 'inventive-repo'
+        url = 'https://repo.inventivetalent.org/content/groups/public/'
+    }
+    maven {
+        url = "https://jitpack.io"
+    }
+
+    flatDir {
+        dirs = ["$rootDir/libs/"]
+    }
+}
+
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
+    implementation (name: 'MVdWPlaceholderAPI-3.1.1') {
+        transitive = false
+    }
+    implementation name: 'Vault-1.7.3'
+    implementation 'me.clip:placeholderapi:2.11.6'
+
+    implementation 'redis.clients:jedis:3.5.1'
+    implementation 'org.apache.commons:commons-pool2:2.4.2'
+    implementation 'com.zaxxer:HikariCP:4.0.2'
+    implementation 'org.slf4j:slf4j-nop:1.7.32'
+    implementation 'org.bstats:bstats-bukkit:1.7'
+    implementation 'com.github.jitpack:gradle-simple:1.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    def group = project.group + '.' + project.name.toLowerCase() + '.shaded'
+
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.yml'
+        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [NAME: project.name, VERSION: project.version, SHADED_GROUP: group])
+    }
+}
+
+tasks.clean {
+    doFirst {
+        delete "$rootDir/out/"
+    }
+}
+
+tasks.shadowJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    destinationDirectory = file("$rootDir/out/")
+    archiveBaseName.set('TokenManager')
+    archiveClassifier.set(null)
+
+    dependencies {
+        include(dependency('redis.clients:.*'))
+        include(dependency('org.apache.commons:.*'))
+        include(dependency('com.zaxxer:.*'))
+        include(dependency('org.slf4j:.*'))
+        include(dependency('org.bstats:.*'))
+    }
+
+    def group = project.group + "." + project.name.toLowerCase() + ".shaded."
+
+    relocate 'redis.clients', group + 'redis.clients'
+    relocate 'org.apache.commons.pool2', group + 'apache.commons.pool2'
+    relocate 'com.zaxxer.hikari', group + 'zaxxer.hikari'
+    relocate 'org.slf4j', group + 'slf4j'
+    relocate 'org.bstats', group + 'bstats'
+}
+
+tasks.build {
+    dependsOn tasks.shadowJar
+}
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

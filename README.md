@@ -38,7 +38,7 @@ Maven:
 Gradle:
 ```groovy
 dependencies {
-    implementation 'com.github.Roland882:TokenManager:Tag'
+    implementation 'com.github.Roland882:TokenManager:VERSION'
 }
 ```  
 Replace 'VERSION' with the tag
@@ -48,7 +48,7 @@ Maven:
 <dependency>
     <groupId>com.github.Roland882</groupId>
     <artifactId>TokenManager</artifactId>
-    <version>Tag</version>
+    <version>VERSION</version>
 </dependency>
 ```
 Replace 'VERSION' with the tag

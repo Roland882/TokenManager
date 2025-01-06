@@ -7,7 +7,7 @@ check-for-updates: true
 # If this is enabled players can exchange their balance to tokens
 exchanging:
   enabled: true
-  # How many tokens should a player get for $100
+  # How many tokens should a player get for 'min-money-amount'
   default-value: 1
   # Min money a player has to have to exchange
   min-money: 100
